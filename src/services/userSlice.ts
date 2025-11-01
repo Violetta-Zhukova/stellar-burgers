@@ -41,10 +41,7 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-export const getUser = createAsyncThunk('user/getUser', async () => {
-  const response = await getUserApi();
-  return response;
-});
+export const getUser = createAsyncThunk('user/getUser', getUserApi);
 
 export const registerUser = createAsyncThunk(
   'user/registerUser',
@@ -56,13 +53,7 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const updateUser = createAsyncThunk(
-  'user/updateUser',
-  async (data: Partial<TRegisterData>) => {
-    const response = await updateUserApi(data);
-    return response;
-  }
-);
+export const updateUser = createAsyncThunk('user/updateUser', updateUserApi);
 
 export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
   const response = await logoutApi();

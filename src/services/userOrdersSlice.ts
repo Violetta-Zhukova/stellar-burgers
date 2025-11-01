@@ -5,6 +5,7 @@ import { TOrder } from '@utils-types';
 type TOrdersState = {
   userOrders: TOrder[];
   newOrder: TOrder | null;
+  orders: TOrder[];
   loading: boolean;
   error: string | undefined;
 };
@@ -12,32 +13,24 @@ type TOrdersState = {
 const initialState: TOrdersState = {
   userOrders: [],
   newOrder: null,
+  orders: [],
   loading: false,
   error: undefined
 };
 
 export const createNewOrder = createAsyncThunk(
   'userOrders/createNewOrder',
-  async (data: string[]) => {
-    const result = await orderBurgerApi(data);
-    return result;
-  }
+  orderBurgerApi
 );
 
 export const getUserOrders = createAsyncThunk(
   'userOrders/getUserOrders',
-  async () => {
-    const result = await getOrdersApi();
-    return result;
-  }
+  getOrdersApi
 );
 
 export const getOrderbyNumber = createAsyncThunk(
   'userOrders/getOrderbyNumber',
-  async (number: number) => {
-    const result = await getOrderByNumberApi(number);
-    return result;
-  }
+  getOrderByNumberApi
 );
 
 export const userOrdersSlice = createSlice({
@@ -51,6 +44,7 @@ export const userOrdersSlice = createSlice({
   selectors: {
     userOrdersSelector: (state) => state.userOrders,
     newOrderSelector: (state) => state.newOrder,
+    ordersByNumberSelector: (state) => state.orders,
     loadingOrderSelector: (state) => state.loading
   },
   extraReducers: (builder) => {
@@ -91,12 +85,16 @@ export const userOrdersSlice = createSlice({
       })
       .addCase(getOrderbyNumber.fulfilled, (state, action) => {
         state.loading = false;
-        state.userOrders = action.payload.orders;
+        state.orders = action.payload.orders;
         state.error = undefined;
       });
   }
 });
 
-export const { userOrdersSelector, newOrderSelector, loadingOrderSelector } =
-  userOrdersSlice.selectors;
+export const {
+  userOrdersSelector,
+  newOrderSelector,
+  loadingOrderSelector,
+  ordersByNumberSelector
+} = userOrdersSlice.selectors;
 export const { clearNewOrder } = userOrdersSlice.actions;
