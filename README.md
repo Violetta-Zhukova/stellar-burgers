@@ -1,19 +1,32 @@
-# Проектная работа 11-го спринта
+# Бургерная Stellar burgers (React, Redux Toolkit, React Router)
 
-[Макет](<https://www.figma.com/file/vIywAvqfkOIRWGOkfOnReY/React-Fullstack_-Проектные-задачи-(3-месяца)_external_link?type=design&node-id=0-1&mode=design>)
+SPA приложение, в ходе которого:
 
-[Чеклист](https://www.notion.so/praktikum/0527c10b723d4873aa75686bad54b32e?pvs=4)
+- был подключен роутер и реализованы маршруты с помощью React Router
+- добавлено глобальное состояние и подключено к страницам с помощью Redux Toolkit
+- реализован механизм авторизации и защиты личного кабинета пользователя
+- реализовано взаимодействие с API
 
-## Этапы работы:
+<img width="400" alt="image" src="./src/images/stellar-1.png">
+<img width="400" alt="image" src="./src/images/stellar-2.png">
+<img width="400" alt="image" src="./src/images/stellar-3.png">
 
-1. Разверните проект и ознакомьтесь с кодом. Все необходимые вам компоненты уже созданы и лежат в папке `src/components`
+## Стек
 
-2. Настройте роутинг.
+<img src='https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white'/> <img src='https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB'/> <img src='https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white'/> <img src='https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white'/> <img src='https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=Webpack&logoColor=white'/> <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" /> <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
 
-3. Напишите функционал запросов данных с сервера, используя `Redux` и глобальный `store`. Сами "ручки" уже прописаны и лежат в `utils/burger-api.ts`
+## Установка и запуск
 
-4. Настройте авторизацию и создайте защищённые роуты.
+Для установки и запуска проекта необходимо выполнить команды
 
-## Важно:
+```
+npm install
+npm run start
+```
 
-Для корректной работы запросов к серверу необходимо добавить переменную BURGER_API_URL в окружение. Сама ссылка находится в файле `.env.example`.
+или
+
+```
+yarn
+yarn start
+```
