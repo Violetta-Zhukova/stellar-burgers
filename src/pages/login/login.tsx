@@ -5,7 +5,7 @@ import {
   isAuthenticatedSelector,
   loginErrorSelector,
   loginUser
-} from '../../services/userSlice';
+} from '../../services/userSlice/userSlice';
 import { Navigate } from 'react-router-dom';
 
 export const Login: FC = () => {

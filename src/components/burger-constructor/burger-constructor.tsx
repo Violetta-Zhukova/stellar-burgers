@@ -7,10 +7,10 @@ import {
   createNewOrder,
   loadingOrderSelector,
   newOrderSelector
-} from '../../services/userOrdersSlice';
+} from '../../services/userOrdersSlice/userOrdersSlice';
 import { useNavigate } from 'react-router-dom';
-import { isAuthenticatedSelector } from '../../services/userSlice';
-import { clearIngredients } from '../../services/burgerSlice';
+import { isAuthenticatedSelector } from '../../services/userSlice/userSlice';
+import { clearIngredients } from '../../services/burgerSlice/burgerSlice';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
