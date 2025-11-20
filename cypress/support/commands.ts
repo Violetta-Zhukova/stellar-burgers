@@ -35,3 +35,13 @@
 //     }
 //   }
 // }
+
+Cypress.Commands.add('openModal', (data: string) => {
+  cy.get('[data-testid="modal"]').should('be.visible');
+  cy.get('[data-testid="modal-data"]').should('contain', data);
+});
+
+Cypress.Commands.add('closeModalByBtn', () => {
+  cy.get('[data-testid="modal-button"]').click();
+  cy.get('[data-testid="modal"]').should('not.exist');
+});

@@ -1,4 +1,5 @@
 /// <reference types="cypress" />
+import type {} from '../../support/cypress';
 
 describe('constructor page', () => {
   beforeEach(() => {
@@ -19,8 +20,11 @@ describe('constructor page', () => {
     );
     cy.setCookie('accessToken', 'test-accessToken');
 
-    cy.visit('http://localhost:4000/');
+    cy.visit('/');
     cy.wait(['@getUser', '@getIngredients']);
+
+    cy.get('[data-testid=1]').as('testBun');
+    cy.get('[data-testid=2]').as('testIngredient');
   });
 
   afterEach(() => {
@@ -38,53 +42,47 @@ describe('constructor page', () => {
   });
 
   it('should add ingredient and bun to constructor', () => {
-    cy.get('[data-testid=1]').find('button').click();
+    cy.get('@testBun').find('button').click();
     cy.get('[data-testid=bun-1]').should('have.length', 2);
 
-    cy.get('[data-testid=2]').find('button').click();
+    cy.get('@testIngredient').find('button').click();
     cy.get('[data-testid=ingredient-2]').should('exist');
   });
 
   it('should open the ingredient modal', () => {
-    cy.get('[data-testid=1]').click();
-    cy.get('[data-testid="modal"]').should('be.visible');
-    cy.get('[data-testid="modal-data"]').should(
-      'contain',
-      'Краторная булка N-200i'
-    );
+    cy.get('@testBun').click();
+    cy.openModal('Краторная булка N-200i');
   });
 
   it('should close modal by clicking on X', () => {
-    cy.get('[data-testid=2]').click();
-    cy.get('[data-testid="modal"]').should('be.visible');
-    cy.get('[data-testid="modal-button"]').click();
-    cy.get('[data-testid="modal"]').should('not.exist');
+    cy.get('@testIngredient').click();
+    cy.openModal('Биокотлета из марсианской Магнолии');
+    cy.closeModalByBtn();
   });
 
   it('should close modal by clicking on overlay', () => {
-    cy.get('[data-testid=3]').click();
-    cy.get('[data-testid="modal"]').should('be.visible');
+    cy.get('@testIngredient').click();
+    cy.openModal('Биокотлета из марсианской Магнолии');
     cy.get('[data-testid="modal-overlay"]').click({ force: true });
     cy.get('[data-testid="modal"]').should('not.exist');
   });
 
   it('should create new order', () => {
-    cy.get('[data-testid=1]').find('button').click();
-    cy.get('[data-testid=bun-1]').should('have.length', 2);
+    cy.get('@testBun').find('button').click();
+    cy.get('[data-testid=bun-1]').as('constructorBun').should('have.length', 2);
 
-    cy.get('[data-testid=2]').find('button').click();
-    cy.get('[data-testid=ingredient-2]').should('exist');
+    cy.get('@testIngredient').find('button').click();
+    cy.get('[data-testid=ingredient-2]')
+      .as('constructorIngredient')
+      .should('exist');
 
     cy.get('[data-testid=order-button]').find('button').click();
     cy.wait('@createOrder');
 
-    cy.get('[data-testid="modal"]').should('be.visible');
-    cy.get('[data-testid="modal-data"]').should('contain', '94810');
+    cy.openModal('94810');
+    cy.closeModalByBtn();
 
-    cy.get('[data-testid="modal-button"]').click();
-    cy.get('[data-testid="modal"]').should('not.exist');
-
-    cy.get('[data-testid=bun-1]').should('not.exist');
-    cy.get('[data-testid=ingredient-2]').should('not.exist');
+    cy.get('@constructorBun').should('not.exist');
+    cy.get('@constructorIngredient').should('not.exist');
   });
 });
