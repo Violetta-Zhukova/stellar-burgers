@@ -3,7 +3,7 @@ import { Preloader } from '../ui/preloader';
 import { IngredientDetailsUI } from '../ui/ingredient-details';
 import { useParams } from 'react-router-dom';
 import { useSelector } from '../../services/store';
-import { ingredientsSelector } from '../../services/ingredientsSlice';
+import { ingredientsSelector } from '../../services/ingredientsSlice/ingredientsSlice';
 
 export const IngredientDetails: FC = () => {
   const { id } = useParams();

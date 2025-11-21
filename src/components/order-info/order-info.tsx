@@ -3,12 +3,12 @@ import { Preloader } from '../ui/preloader';
 import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useDispatch, useSelector } from '../../services/store';
-import { ingredientsSelector } from '../../services/ingredientsSlice';
+import { ingredientsSelector } from '../../services/ingredientsSlice/ingredientsSlice';
 import { useParams } from 'react-router-dom';
 import {
   getOrderbyNumber,
   ordersByNumberSelector
-} from '../../services/userOrdersSlice';
+} from '../../services/userOrdersSlice/userOrdersSlice';
 
 export const OrderInfo: FC = () => {
   const { number } = useParams();

@@ -8,7 +8,7 @@ interface TBurgerState {
   };
 }
 
-const initialState: TBurgerState = {
+export const initialState: TBurgerState = {
   constructorItems: {
     bun: null,
     ingredients: []
@@ -20,10 +20,7 @@ export const burgerSlice = createSlice({
   initialState,
   reducers: {
     addIngredient: {
-      reducer: (
-        state,
-        action: PayloadAction<TIngredient | TConstructorIngredient>
-      ) => {
+      reducer: (state, action: PayloadAction<TIngredient>) => {
         if (action.payload.type === 'bun') {
           state.constructorItems.bun = action.payload as TIngredient;
         } else {

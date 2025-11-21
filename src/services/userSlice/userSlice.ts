@@ -6,10 +6,10 @@ import {
   TLoginData,
   TRegisterData,
   updateUserApi
-} from '@api';
+} from '../../utils/burger-api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TUser } from '@utils-types';
-import { setCookie } from '../utils/cookie';
+import { setCookie } from '../../utils/cookie';
 
 type TUserState = {
   isAuthChecked: boolean;
@@ -21,7 +21,7 @@ type TUserState = {
   logoutError: string | undefined;
 };
 
-const initialState: TUserState = {
+export const initialState: TUserState = {
   isAuthChecked: false,
   isAuthenticated: false,
   userData: null,
@@ -144,7 +144,7 @@ export const userSlice = createSlice({
         state.isAuthChecked = true;
         state.isAuthenticated = true;
       })
-      .addCase(logoutUser.fulfilled, (state, action) => {
+      .addCase(logoutUser.fulfilled, (state) => {
         state.isAuthChecked = true;
         state.isAuthenticated = false;
         state.userData = null;
